@@ -12,6 +12,10 @@ target/
 *.iml
 *.ipr
 
+# Local configuration file (sdk path, etc)
+local.properties
+.properties
+
 ### Eclipse ###
 .apt_generated
 .classpath
