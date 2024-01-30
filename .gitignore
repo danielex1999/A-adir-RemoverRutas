@@ -16,8 +16,9 @@ target/
 local.properties
 .properties
 
-# Ignorar el archivo config.properties
-config.properties
+# Ignorar config.properties dentro de src/main/resources
+src/main/resources/config.properties
+
 
 
 ### Eclipse ###
