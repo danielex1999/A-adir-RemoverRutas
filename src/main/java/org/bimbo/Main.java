@@ -23,7 +23,7 @@ public class Main {
         FileInputStream fis = new FileInputStream(rutaExcel);
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         GeneracionCampos generacionCampos = new GeneracionCampos();
-        AsignarCliente asignarCliente= new AsignarCliente();
+        AsignarCliente asignarCliente = new AsignarCliente();
         XSSFSheet sheet = workbook.getSheetAt(0);
         Login login = new Login();
         RegistroCliente registroCliente = new RegistroCliente();
@@ -39,12 +39,12 @@ public class Main {
         //---
         for (int i = filaInicio; i <= filaFinal; i++) {
             XSSFRow row = sheet.getRow(i - 1);
-            asignarCliente.AsignacionCliente(row,driver);
+            asignarCliente.AsignacionCliente(row, driver);
             System.out.println("------------------");
         }
 
         workbook.close();
-        driver.quit();
+
 
     }
 
@@ -54,4 +54,5 @@ public class Main {
             workbook.write(fileOut);
         }
     }
+
 }
