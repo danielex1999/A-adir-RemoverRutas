@@ -15,6 +15,7 @@ public class AsignarCliente {
         XSSFCell Agencia = row.getCell(1);
         XSSFCell Codigo = row.getCell(2);
         XSSFCell RutaPreventa = row.getCell(3);
+        XSSFCell EstadoActual =row.createCell(4);
 
         // Funcionalidad del método
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -28,7 +29,7 @@ public class AsignarCliente {
 
         WebElement buttonFiltrar = driver.findElement(By.xpath("//*[@id=\"collection_Customers-modal\"]/div[2]/button[1]"));
         buttonFiltrar.click();
-        Thread.sleep(2000);
+        Thread.sleep(1500);
 
         // Centro de Ventas
         WebElement comboBox = driver.findElement(By.xpath("//*[@id=\"_row2\"]/div/div/div[5]/div/div/input"));
@@ -36,35 +37,36 @@ public class AsignarCliente {
         wait.until(ExpectedConditions.attributeContains(comboBox, "class", "active"));
 
         WebElement optionElement = driver.findElement(By.xpath("//li/span[text()='" + agenciaMapping.obtenerAgenciaSeleccionada(Agencia.getStringCellValue()) + "']"));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         optionElement.click();
+        Thread.sleep(2000);
 
         // Clic al cliente
         WebElement divElement = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div[data-bind='visible: matched, click: $parent.rowClick, css: { active: selected() }']")));
         divElement.click();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
 
         //Agregar Ruta
         WebElement inputElementRuta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[2]/div/div/input")));
         inputElementRuta.clear();
         inputElementRuta.sendKeys(RutaPreventa.getStringCellValue());
         inputElementRuta.sendKeys(Keys.ENTER);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
-        //activo?
-        WebElement lever = driver.findElement(By.cssSelector(".switch label input + .lever"));
+        //Estado de Ruta?
+        WebElement interruptor = driver.findElement(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[5]/div/div/div[6]/div/div/label/span"));
 
-        // Usa JavaScript para obtener el estilo computado del pseudo-elemento :after
-        String script = "return window.getComputedStyle(arguments[0], ':after').getPropertyValue('left');";
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        String leftValue = (String) jsExecutor.executeScript(script, lever);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String leftValue = (String) js.executeScript("return window.getComputedStyle(arguments[0], ':after').left;", interruptor);
 
-        // Compara el valor con "24px" y muestra el mensaje correspondiente
         if ("24px".equals(leftValue)) {
-            System.out.println("Activo");
+            EstadoActual.setCellValue("Ruta Activa");
+            System.out.println("Ruta Activa");
         } else {
-            System.out.println("Desactivo");
+            EstadoActual.setCellValue("Ruta No Activa");
+            System.out.println("Ruta No Activa");
         }
+
 
     }
 

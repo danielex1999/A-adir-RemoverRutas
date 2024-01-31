@@ -44,14 +44,16 @@ public class Main {
         //------------------------------------------------------------------
         login.InicioSesion(driver);
         registroCliente.IngresoCentrodeVentas(driver);
-        int filaInicio = 2, filaFinal = 3;
+        int filaInicio = 2, filaFinal = 138;
         for (int i = filaInicio; i <= filaFinal; i++) {
             XSSFRow row = sheet.getRow(i - 1);
+            System.out.println("Se esta realizando la fila "+i);
             asignarCliente.AsignacionCliente(row, driver);
+            System.out.println("---------------------------------");
             saveWorkbook(workbook, rutaExcel);
         }
         workbook.close();
-        //driver.quit();
+        driver.quit();
     }
 
 
