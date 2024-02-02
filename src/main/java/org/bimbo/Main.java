@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         // Rutas
         String perfilOriginal = "C:\\Users\\danie\\AppData\\Local\\Google\\Chrome\\User Data";
-        String rutaExcel = "C:\\Users\\danie\\OneDrive\\Escritorio\\INDEP.xlsx";
+        String rutaExcel = "C:\\Users\\danie\\OneDrive\\Escritorio\\RUTA INDEP PARTE 3.xlsx";
 
         // Configuración del WebDriver
         ChromeOptions opciones = new ChromeOptions();
@@ -44,7 +44,7 @@ public class Main {
         //------------------------------------------------------------------
         login.InicioSesion(driver);
         registroCliente.IngresoCentrodeVentas(driver);
-        int filaInicio = 2, filaFinal = 138;
+        int filaInicio = 1194, filaFinal = 1398;
         for (int i = filaInicio; i <= filaFinal; i++) {
             XSSFRow row = sheet.getRow(i - 1);
             System.out.println("Se esta realizando la fila "+i);

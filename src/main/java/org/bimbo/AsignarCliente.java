@@ -12,10 +12,12 @@ public class AsignarCliente {
 
     public void AsignacionCliente(XSSFRow row, WebDriver driver) throws InterruptedException {
         // Insertando valores de Agencia, Codigo, Ruta Preventa, Status
+        boolean estadoActivo = false;
         XSSFCell Agencia = row.getCell(1);
         XSSFCell Codigo = row.getCell(2);
         XSSFCell RutaPreventa = row.getCell(3);
-        XSSFCell EstadoActual =row.createCell(4);
+        XSSFCell EstadoAnterior = row.createCell(4);
+        XSSFCell EstadoActual = row.createCell(5);
 
         // Funcionalidad del método
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -48,26 +50,43 @@ public class AsignarCliente {
 
         //Agregar Ruta
         WebElement inputElementRuta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[2]/div/div/input")));
+
+        try {
+            WebElement testingasd = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[2]/div/div/div/i")));
+            testingasd.click();
+        } catch (TimeoutException e) {
+            System.out.println("El elemento 'testingasd' no se encontró dentro del tiempo especificado.");
+        }
+
         inputElementRuta.clear();
         inputElementRuta.sendKeys(RutaPreventa.getStringCellValue());
         inputElementRuta.sendKeys(Keys.ENTER);
         Thread.sleep(1000);
 
-        //Estado de Ruta?
+        //Estado de Ruta
         WebElement interruptor = driver.findElement(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[5]/div/div/div[6]/div/div/label/span"));
-
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String leftValue = (String) js.executeScript("return window.getComputedStyle(arguments[0], ':after').left;", interruptor);
-
         if ("24px".equals(leftValue)) {
+            EstadoAnterior.setCellValue("Ruta Activa");
             EstadoActual.setCellValue("Ruta Activa");
-            System.out.println("Ruta Activa");
+            estadoActivo = true;
         } else {
-            EstadoActual.setCellValue("Ruta No Activa");
+            EstadoAnterior.setCellValue("Ruta No Activa");
             System.out.println("Ruta No Activa");
         }
-
-
+        //Agregar de Ruta
+        if (!estadoActivo) {
+            WebElement buttonEditar = driver.findElement(By.id("btn_edit_detail"));
+            buttonEditar.click();
+            Thread.sleep(1000);
+            WebElement modificarRuta = driver.findElement(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[5]/div/div/div[6]/div/div/label"));
+            modificarRuta.click();
+            WebElement buttonGuardar = driver.findElement(By.id("btnSaveCustomer"));
+            buttonGuardar.click();
+            Thread.sleep(5000);
+            EstadoActual.setCellValue("Ruta Agregada");
+        }
     }
 
     private void clickElementWithJS(WebDriver driver, WebElement element) {
