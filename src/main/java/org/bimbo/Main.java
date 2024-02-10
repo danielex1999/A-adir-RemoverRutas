@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         // Rutas
         String perfilOriginal = "C:\\Users\\danie\\AppData\\Local\\Google\\Chrome\\User Data";
-        String rutaExcel = "C:\\Users\\danie\\OneDrive\\Escritorio\\RUTA INDEP PARTE 3.xlsx";
+        String rutaExcel = "C:\\Users\\danie\\OneDrive\\Escritorio\\RETIRAR RUTA INDEP.xlsx";
 
         // Configuración del WebDriver
         ChromeOptions opciones = new ChromeOptions();
@@ -35,6 +35,7 @@ public class Main {
         // Instancias de clases
         GeneracionCampos generacionCampos = new GeneracionCampos();
         AsignarCliente asignarCliente = new AsignarCliente();
+        RetirarCliente retirarCliente=new RetirarCliente();
         Login login = new Login();
         RegistroCliente registroCliente = new RegistroCliente();
 
@@ -44,11 +45,11 @@ public class Main {
         //------------------------------------------------------------------
         login.InicioSesion(driver);
         registroCliente.IngresoCentrodeVentas(driver);
-        int filaInicio = 1194, filaFinal = 1398;
+        int filaInicio = 1903, filaFinal = 2674;
         for (int i = filaInicio; i <= filaFinal; i++) {
             XSSFRow row = sheet.getRow(i - 1);
             System.out.println("Se esta realizando la fila "+i);
-            asignarCliente.AsignacionCliente(row, driver);
+            retirarCliente.RetiradaCliente(row, driver);
             System.out.println("---------------------------------");
             saveWorkbook(workbook, rutaExcel);
         }
