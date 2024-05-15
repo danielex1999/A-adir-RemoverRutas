@@ -49,10 +49,10 @@ public class RetirarCliente {
         Thread.sleep(2000);
 
         //Retirar Ruta
-        WebElement inputElementRuta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[2]/div/div/input")));
+        WebElement inputElementRuta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[68]/div/div/div/div/div[5]/div/div/div[2]/div/div/input")));
 
         try {
-            WebElement Ruta_buscada = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[2]/div/div/div/i")));
+            WebElement Ruta_buscada = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[68]/div/div/div/div/div[5]/div/div/div[2]/div/div/div/i")));
             Ruta_buscada.click();
         } catch (TimeoutException e) {
             System.out.println("No se encontró la ruta en el tiempo especificado.");
@@ -64,7 +64,7 @@ public class RetirarCliente {
         Thread.sleep(1000);
 
         //Estado de Ruta
-        WebElement interruptor = driver.findElement(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[5]/div/div/div[6]/div/div/label/span"));
+        WebElement interruptor = driver.findElement(By.xpath("/html/body/div[1]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[68]/div/div/div/div/div[5]/div/div/div[5]/div/div/div[6]/div/div/label/span"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String leftValue = (String) js.executeScript("return window.getComputedStyle(arguments[0], ':after').left;", interruptor);
         if (!"24px".equals(leftValue)) {
@@ -81,7 +81,7 @@ public class RetirarCliente {
             WebElement buttonEditar = driver.findElement(By.id("btn_edit_detail"));
             buttonEditar.click();
             Thread.sleep(1000);
-            WebElement modificarRuta = driver.findElement(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[5]/div/div/div[6]/div/div/label"));
+            WebElement modificarRuta = driver.findElement(By.xpath("/html/body/div[1]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[68]/div/div/div/div/div[5]/div/div/div[5]/div/div/div[6]/div/div/label"));
             modificarRuta.click();
             WebElement buttonGuardar = driver.findElement(By.id("btnSaveCustomer"));
             buttonGuardar.click();

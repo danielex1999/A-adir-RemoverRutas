@@ -20,4 +20,3 @@
 <code><a href="" target="_blank"><img src="src/main/resources/img/selenium.png"	width="26px" alt="selenium"></a></code>
 <code><a href="" target="_blank"><img src="src/main/resources/img/java.png"	width="30px" alt="java"></a></code>
 <code><a href="" target="_blank"><img src="src/main/resources/img/Intellj.svg.png"	width="26px" alt="intellj"></a></code>
-

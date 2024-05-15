@@ -46,16 +46,16 @@ public class AsignarCliente {
         // Clic al cliente
         WebElement divElement = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div[data-bind='visible: matched, click: $parent.rowClick, css: { active: selected() }']")));
         divElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
 
         //Agregar Ruta
-        WebElement inputElementRuta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[2]/div/div/input")));
+        WebElement inputElementRuta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[2]/div/div/input")));
 
         try {
-            WebElement testingasd = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[2]/div/div/div/i")));
-            testingasd.click();
+            WebElement Ruta_buscada = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[2]/div/div/div/i")));
+            Ruta_buscada.click();
         } catch (TimeoutException e) {
-            System.out.println("El elemento 'testingasd' no se encontró dentro del tiempo especificado.");
+            System.out.println("No se encontró la ruta en el tiempo especificado.");
         }
 
         inputElementRuta.clear();
@@ -64,7 +64,7 @@ public class AsignarCliente {
         Thread.sleep(1000);
 
         //Estado de Ruta
-        WebElement interruptor = driver.findElement(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[5]/div/div/div[6]/div/div/label/span"));
+        WebElement interruptor = driver.findElement(By.xpath("/html/body/div[1]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[5]/div/div/div[6]/div/div/label/span"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String leftValue = (String) js.executeScript("return window.getComputedStyle(arguments[0], ':after').left;", interruptor);
         if ("24px".equals(leftValue)) {
@@ -80,8 +80,9 @@ public class AsignarCliente {
             WebElement buttonEditar = driver.findElement(By.id("btn_edit_detail"));
             buttonEditar.click();
             Thread.sleep(1000);
-            WebElement modificarRuta = driver.findElement(By.xpath("/html/body/div[2]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[5]/div/div/div[6]/div/div/label"));
+            WebElement modificarRuta = driver.findElement(By.xpath("/html/body/div[1]/div/section/div[1]/div/form/div/div/div[2]/div/div/div/div/div[66]/div/div/div/div/div[5]/div/div/div[5]/div/div/div[6]/div/div/label"));
             modificarRuta.click();
+            Thread.sleep(1000);
             WebElement buttonGuardar = driver.findElement(By.id("btnSaveCustomer"));
             buttonGuardar.click();
             Thread.sleep(5000);
