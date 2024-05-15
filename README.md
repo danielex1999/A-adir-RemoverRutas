@@ -14,6 +14,9 @@
 
 </div>
 
+---
+
+
 > [!NOTE]
 > Se está utilizando para este proyecto las siguientes tecnologías.
 
