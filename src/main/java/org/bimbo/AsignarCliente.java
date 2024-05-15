@@ -62,7 +62,7 @@ public class AsignarCliente {
         // Clic al cliente
         WebElement ClientClickable = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(properties.getProperty("xpath-ClientClickable-mc1"))));
         ClientClickable.click();
-        Thread.sleep(4000);
+        Thread.sleep(2000);
 
         //Agregar Ruta
         WebElement inputElementRuta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-inputElementRuta-mc1"))));
@@ -87,9 +87,9 @@ public class AsignarCliente {
             EstadoAnterior.setCellValue("Ruta Activa");
             EstadoActual.setCellValue("Ruta Activa");
             estadoActivo = true;
+            System.out.println("La ruta se encuentra activa");
         } else {
             EstadoAnterior.setCellValue("Ruta No Activa");
-            System.out.println("Ruta No Activa");
         }
 
         //Agregar Ruta al Cliente
@@ -99,11 +99,12 @@ public class AsignarCliente {
             Thread.sleep(1000);
             WebElement modificarRuta = driver.findElement(By.xpath(properties.getProperty("xpath-modificarRuta-mc1")));
             modificarRuta.click();
-            Thread.sleep(1000);
+            Thread.sleep(500);
             WebElement buttonGuardar = driver.findElement(By.id("btnSaveCustomer"));
             buttonGuardar.click();
             Thread.sleep(5000);
             EstadoActual.setCellValue("Ruta Agregada");
+            System.out.println("La ruta ha sido agregada");
         }
     }
 
