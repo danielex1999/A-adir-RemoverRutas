@@ -10,11 +10,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.InputStream;
 import java.util.Properties;
+
 public class RetirarCliente {
     private static final AgenciaMapping agenciaMapping = new AgenciaMapping();
 
     private static final String PROPERTIES_FILE = "config.properties";
     private static final Properties properties;
+
+    static String agenciaAnterior = "";
+    static String rutaAnterior = "";
 
     static {
         properties = new Properties();
@@ -43,41 +47,48 @@ public class RetirarCliente {
         WebElement inputElementCodigoCliente = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("txtcIDCustomerFilter")));
         inputElementCodigoCliente.clear();
         inputElementCodigoCliente.sendKeys(Codigo.getStringCellValue());
-        Thread.sleep(2000);
+        Thread.sleep(500);
 
         WebElement buttonFiltrar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-buttonFiltrar-mc1"))));
         buttonFiltrar.click();
-        Thread.sleep(1500);
+        Thread.sleep(500);
 
         // Listado de las Agencias
-        WebElement comboBoxAgencia = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-comboBoxAgencia-mc1"))));
-        comboBoxAgencia.click();
-        wait.until(ExpectedConditions.attributeContains(comboBoxAgencia, "class", "active"));
 
-        WebElement optionElement = wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//li/span[text()='" + agenciaMapping.obtenerAgenciaSeleccionada(Agencia.getStringCellValue()) + "']"))));
-        Thread.sleep(1000);
-        optionElement.click();
-        Thread.sleep(2000);
+        if (!agenciaAnterior.equals(Agencia.getStringCellValue())) {
+            WebElement comboBoxAgencia = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-comboBoxAgencia-mc1"))));
+            comboBoxAgencia.click();
+            wait.until(ExpectedConditions.attributeContains(comboBoxAgencia, "class", "active"));
+
+            WebElement optionElement = wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//li/span[text()='" + agenciaMapping.obtenerAgenciaSeleccionada(Agencia.getStringCellValue()) + "']"))));
+            Thread.sleep(500);
+            optionElement.click();
+            Thread.sleep(500);
+        }
+        agenciaAnterior = Agencia.getStringCellValue();
 
         // Clic al cliente
         WebElement ClientClickable = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(properties.getProperty("xpath-ClientClickable-mc1"))));
         ClientClickable.click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Retirar Ruta
-        WebElement inputElementRuta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-inputElementRuta-mc1"))));
+        if (!rutaAnterior.equals(RutaPreventa.getStringCellValue())) {
+            WebElement inputElementRuta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-inputElementRuta-mc1"))));
 
-        try {
-            WebElement RutaBuscada = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-RutaBuscada-mc1"))));
-            RutaBuscada.click();
-        } catch (TimeoutException e) {
-            System.out.println("No se encontró la ruta en el tiempo especificado.");
+            try {
+                WebElement RutaBuscada = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-RutaBuscada-mc1"))));
+                RutaBuscada.click();
+            } catch (TimeoutException e) {
+                System.out.println("No se encontró la ruta en el tiempo especificado.");
+            }
+
+            inputElementRuta.clear();
+            inputElementRuta.sendKeys(RutaPreventa.getStringCellValue());
+            inputElementRuta.sendKeys(Keys.ENTER);
+            Thread.sleep(500);
         }
-
-        inputElementRuta.clear();
-        inputElementRuta.sendKeys(RutaPreventa.getStringCellValue());
-        inputElementRuta.sendKeys(Keys.ENTER);
-        Thread.sleep(1000);
+        rutaAnterior = RutaPreventa.getStringCellValue();
 
         //Estado de Ruta
         WebElement interruptor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-interruptor-mc1"))));
@@ -96,13 +107,13 @@ public class RetirarCliente {
         if (!estadoDesactivo) {
             WebElement buttonEditar = driver.findElement(By.id("btn_edit_detail"));
             buttonEditar.click();
-            Thread.sleep(1000);
+            Thread.sleep(500);
             WebElement modificarRuta = driver.findElement(By.xpath(properties.getProperty("xpath-modificarRuta-mc1")));
             modificarRuta.click();
             Thread.sleep(500);
             WebElement buttonGuardar = driver.findElement(By.id("btnSaveCustomer"));
             buttonGuardar.click();
-            Thread.sleep(5000);
+            Thread.sleep(4000);
             EstadoActual.setCellValue("Ruta Retirada");
             System.out.println("La ruta ha sido retirada");
         }

@@ -21,7 +21,7 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         // Rutas
         String perfilOriginal = "C:\\Users\\danie\\AppData\\Local\\Google\\Chrome\\User Data";
-        String rutaExcel = "C:\\Users\\danie\\OneDrive\\Escritorio\\RUTA 1600 SJL.xlsx";
+        String rutaExcel = "C:\\Users\\danie\\OneDrive\\Escritorio\\RETIRAR RUTA SJL (2).xlsx";
 
         // Configuración del WebDriver
         ChromeOptions opciones = new ChromeOptions();
@@ -44,21 +44,23 @@ public class Main {
         // Creación de celdas y fila en la hoja de Excel
         generacionCampos.CreacionCeldaFila(sheet);
 
-        //Tiempo
-        LocalDateTime locaDate = LocalDateTime.now();
-        int hours  = locaDate.getHour();
-        int minutes = locaDate.getMinute();
-        int seconds = locaDate.getSecond();
-        String formattedTime = String.format("[%02d:%02d:%02d]", hours, minutes, seconds);
+
         //------------------------------------------------------------------
         login.InicioSesion(driver);
         registroCliente.IngresoCentrodeVentas(driver);
-        int filaInicio = 10, filaFinal = 339;
+
+        int filaInicio = 2, filaFinal = 487;
         for (int i = filaInicio; i <= filaFinal; i++) {
+            //Tiempo
+            LocalDateTime locaDate = LocalDateTime.now();
+            int hours  = locaDate.getHour();
+            int minutes = locaDate.getMinute();
+            int seconds = locaDate.getSecond();
+            String formattedTime = String.format("[%02d:%02d:%02d]", hours, minutes, seconds);
             XSSFRow row = sheet.getRow(i - 1);
             System.out.println(formattedTime+" Se esta realizando la fila "+i);
-            //retirarCliente.RetiradaCliente(row, driver);
-            asignarCliente.AsignacionCliente(row,driver);
+            retirarCliente.RetiradaCliente(row, driver);
+            //asignarCliente.AsignacionCliente(row,driver);
             System.out.println("---------------------------------");
             saveWorkbook(workbook, rutaExcel);
         }
