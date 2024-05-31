@@ -40,7 +40,7 @@ public class RetirarCliente {
         XSSFCell EstadoActual = row.createCell(5);
 
         // Ingreso del Código de Cliente
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 5);
         WebElement modalTrigger = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-modalTrigger-mc1"))));
         clickElementWithJS(driver, modalTrigger);
 
@@ -68,54 +68,65 @@ public class RetirarCliente {
         agenciaAnterior = Agencia.getStringCellValue();
 
         // Clic al cliente
-        WebElement ClientClickable = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(properties.getProperty("xpath-ClientClickable-mc1"))));
-        ClientClickable.click();
-        Thread.sleep(1000);
+        boolean clienteClickeado = false;
+        try {
+            WebElement ClientClickable = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(properties.getProperty("xpath-ClientClickable-mc1"))));
+            ClientClickable.click();
+            Thread.sleep(1000);
+            clienteClickeado = true;
+        } catch (TimeoutException e) {
+            EstadoAnterior.setCellValue("---");
+            EstadoActual.setCellValue("No se encontró la ruta en la agencia " + Agencia.getStringCellValue());
 
-        //Retirar Ruta
-        if (!rutaAnterior.equals(RutaPreventa.getStringCellValue())) {
-            WebElement inputElementRuta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-inputElementRuta-mc1"))));
+        }
+        if (clienteClickeado) {
+            //Retirar Ruta
+            if (!rutaAnterior.equals(RutaPreventa.getStringCellValue())) {
+                WebElement inputElementRuta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-inputElementRuta-mc1"))));
 
-            try {
-                WebElement RutaBuscada = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-RutaBuscada-mc1"))));
-                RutaBuscada.click();
-            } catch (TimeoutException e) {
-                System.out.println("No se encontró la ruta en el tiempo especificado.");
+                try {
+                    WebElement RutaBuscada = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-RutaBuscada-mc1"))));
+                    RutaBuscada.click();
+                } catch (TimeoutException e) {
+                    System.out.println("No se encontró la ruta en el tiempo especificado.");
+                }
+
+                inputElementRuta.clear();
+                inputElementRuta.sendKeys(RutaPreventa.getStringCellValue());
+                inputElementRuta.sendKeys(Keys.ENTER);
+                Thread.sleep(500);
+            }
+            rutaAnterior = RutaPreventa.getStringCellValue();
+
+            //Estado de Ruta
+            WebElement interruptor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-interruptor-mc1"))));
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            String leftValue = (String) js.executeScript("return window.getComputedStyle(arguments[0], ':after').left;", interruptor);
+            if (!"24px".equals(leftValue)) {
+                EstadoAnterior.setCellValue("Ruta No Activa");
+                EstadoActual.setCellValue("Ruta No Activa");
+                estadoDesactivo = true;
+                System.out.println("La ruta se encuentra no activa");
+            } else {
+                EstadoAnterior.setCellValue("Ruta Activa");
             }
 
-            inputElementRuta.clear();
-            inputElementRuta.sendKeys(RutaPreventa.getStringCellValue());
-            inputElementRuta.sendKeys(Keys.ENTER);
-            Thread.sleep(500);
-        }
-        rutaAnterior = RutaPreventa.getStringCellValue();
-
-        //Estado de Ruta
-        WebElement interruptor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-interruptor-mc1"))));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        String leftValue = (String) js.executeScript("return window.getComputedStyle(arguments[0], ':after').left;", interruptor);
-        if (!"24px".equals(leftValue)) {
-            EstadoAnterior.setCellValue("Ruta No Activa");
-            EstadoActual.setCellValue("Ruta No Activa");
-            estadoDesactivo = true;
-            System.out.println("La ruta se encuentra no activa");
+            //Retirar de Ruta
+            if (!estadoDesactivo) {
+                WebElement buttonEditar = driver.findElement(By.id("btn_edit_detail"));
+                buttonEditar.click();
+                Thread.sleep(500);
+                WebElement modificarRuta = driver.findElement(By.xpath(properties.getProperty("xpath-modificarRuta-mc1")));
+                modificarRuta.click();
+                Thread.sleep(500);
+                WebElement buttonGuardar = driver.findElement(By.id("btnSaveCustomer"));
+                buttonGuardar.click();
+                Thread.sleep(4000);
+                EstadoActual.setCellValue("Ruta Retirada");
+                System.out.println("La ruta ha sido retirada");
+            }
         } else {
-            EstadoAnterior.setCellValue("Ruta Activa");
-        }
-
-        //Retirar de Ruta
-        if (!estadoDesactivo) {
-            WebElement buttonEditar = driver.findElement(By.id("btn_edit_detail"));
-            buttonEditar.click();
-            Thread.sleep(500);
-            WebElement modificarRuta = driver.findElement(By.xpath(properties.getProperty("xpath-modificarRuta-mc1")));
-            modificarRuta.click();
-            Thread.sleep(500);
-            WebElement buttonGuardar = driver.findElement(By.id("btnSaveCustomer"));
-            buttonGuardar.click();
-            Thread.sleep(4000);
-            EstadoActual.setCellValue("Ruta Retirada");
-            System.out.println("La ruta ha sido retirada");
+            System.out.println("Se encontró un error al hacer clic en el cliente, no se realizaron más acciones.");
         }
     }
 

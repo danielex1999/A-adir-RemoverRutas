@@ -21,13 +21,15 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         // Rutas
         String perfilOriginal = "C:\\Users\\danie\\AppData\\Local\\Google\\Chrome\\User Data";
-        String rutaExcel = "C:\\Users\\danie\\OneDrive\\Escritorio\\RETIRAR RUTA SJL (2).xlsx";
+        String rutaExcel = "C:\\Users\\danie\\OneDrive\\Escritorio\\CHIMBOTE RETIRAR RUTA.xlsx";
 
         // Configuración del WebDriver
         ChromeOptions opciones = new ChromeOptions();
         opciones.addArguments("--user-data-dir=" + perfilOriginal);
+
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\danie\\Documents\\chromedriver.exe");
         WebDriver driver = new ChromeDriver(opciones);
+
 
         // Lectura del archivo Excel
         FileInputStream fis = new FileInputStream(rutaExcel);
@@ -49,7 +51,7 @@ public class Main {
         login.InicioSesion(driver);
         registroCliente.IngresoCentrodeVentas(driver);
 
-        int filaInicio = 2, filaFinal = 487;
+        int filaInicio = 1232, filaFinal = 1270;
         for (int i = filaInicio; i <= filaFinal; i++) {
             //Tiempo
             LocalDateTime locaDate = LocalDateTime.now();
