@@ -13,63 +13,63 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
-
+import java.util.Properties;
 
 public class Main {
+    private static final String PROPERTIES_FILE = "config.properties";
+    private static final Properties properties;
+
+    static {
+        properties = new Properties();
+        try (InputStream input = Login.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
+            properties.load(input);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        // Rutas
-        String perfilOriginal = "C:\\Users\\danie\\AppData\\Local\\Google\\Chrome\\User Data";
-        String rutaExcel = "C:\\Users\\danie\\OneDrive\\Escritorio\\ENTRE LUN MAR MIE.xlsx";
+        String nameExcelFile = "ENTRE LUN MAR MIE";
+        int filaInicio = 2, filaFinal = 515;
 
-        // Configuración del WebDriver
         ChromeOptions opciones = new ChromeOptions();
-        opciones.addArguments("--user-data-dir=" + perfilOriginal);
+        opciones.addArguments("--user-data-dir=" + properties.getProperty("chrome-options"));
 
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\danie\\Documents\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", properties.getProperty("chromedriver-path"));
         WebDriver driver = new ChromeDriver(opciones);
 
-
-        // Lectura del archivo Excel
-        FileInputStream fis = new FileInputStream(rutaExcel);
+        FileInputStream fis = new FileInputStream(properties.getProperty("excel-path-file") + nameExcelFile + ".xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         XSSFSheet sheet = workbook.getSheetAt(0);
 
-        // Instancias de clases
         GeneracionCampos generacionCampos = new GeneracionCampos();
         AsignarCliente asignarCliente = new AsignarCliente();
-        RetirarCliente retirarCliente=new RetirarCliente();
+        RetirarCliente retirarCliente = new RetirarCliente();
         Login login = new Login();
         RegistroCliente registroCliente = new RegistroCliente();
-
-        // Creación de celdas y fila en la hoja de Excel
         generacionCampos.CreacionCeldaFila(sheet);
 
-
-        //------------------------------------------------------------------
         login.InicioSesion(driver);
         registroCliente.IngresoCentrodeVentas(driver);
 
-        int filaInicio = 438, filaFinal = 515;
         for (int i = filaInicio; i <= filaFinal; i++) {
-            //Tiempo
             LocalDateTime locaDate = LocalDateTime.now();
-            int hours  = locaDate.getHour();
+            int hours = locaDate.getHour();
             int minutes = locaDate.getMinute();
             int seconds = locaDate.getSecond();
             String formattedTime = String.format("[%02d:%02d:%02d]", hours, minutes, seconds);
             XSSFRow row = sheet.getRow(i - 1);
-            System.out.println(formattedTime+" Se esta realizando la fila "+i);
+            System.out.println(formattedTime + " Se esta realizando la fila " + i);
             //retirarCliente.RetiradaCliente(row, driver);
-            asignarCliente.AsignacionCliente(row,driver);
+            asignarCliente.AsignacionCliente(row, driver);
             System.out.println("---------------------------------");
-            saveWorkbook(workbook, rutaExcel);
+            saveWorkbook(workbook, properties.getProperty("excel-path-file") + nameExcelFile + ".xlsx");
         }
         workbook.close();
         driver.quit();
     }
-
 
     private static void saveWorkbook(XSSFWorkbook workbook, String filePath) throws IOException {
         try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
