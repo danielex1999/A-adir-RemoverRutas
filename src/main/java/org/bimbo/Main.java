@@ -21,7 +21,7 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         // Rutas
         String perfilOriginal = "C:\\Users\\danie\\AppData\\Local\\Google\\Chrome\\User Data";
-        String rutaExcel = "C:\\Users\\danie\\OneDrive\\Escritorio\\CHIMBOTE RETIRAR RUTA.xlsx";
+        String rutaExcel = "C:\\Users\\danie\\OneDrive\\Escritorio\\ENTRE LUN MAR MIE.xlsx";
 
         // Configuración del WebDriver
         ChromeOptions opciones = new ChromeOptions();
@@ -51,7 +51,7 @@ public class Main {
         login.InicioSesion(driver);
         registroCliente.IngresoCentrodeVentas(driver);
 
-        int filaInicio = 1232, filaFinal = 1270;
+        int filaInicio = 438, filaFinal = 515;
         for (int i = filaInicio; i <= filaFinal; i++) {
             //Tiempo
             LocalDateTime locaDate = LocalDateTime.now();
@@ -61,8 +61,8 @@ public class Main {
             String formattedTime = String.format("[%02d:%02d:%02d]", hours, minutes, seconds);
             XSSFRow row = sheet.getRow(i - 1);
             System.out.println(formattedTime+" Se esta realizando la fila "+i);
-            retirarCliente.RetiradaCliente(row, driver);
-            //asignarCliente.AsignacionCliente(row,driver);
+            //retirarCliente.RetiradaCliente(row, driver);
+            asignarCliente.AsignacionCliente(row,driver);
             System.out.println("---------------------------------");
             saveWorkbook(workbook, rutaExcel);
         }

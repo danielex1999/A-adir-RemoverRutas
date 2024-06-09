@@ -40,7 +40,7 @@ public class AsignarCliente {
         XSSFCell EstadoActual = row.createCell(5);
 
         // Ingreso del Código de Cliente
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 5);
         WebElement modalTrigger = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(properties.getProperty("xpath-modalTrigger-mc1"))));
         clickElementWithJS(driver, modalTrigger);
 
