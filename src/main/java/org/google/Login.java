@@ -24,7 +24,7 @@ public class Login {
     }
 
     public void InicioSesion(WebDriver driver) throws InterruptedException {
-        driver.get("https://prodweb-bimbo-las.mc1.com.br/WTM_Client/Account/Login?ReturnUrl=%2FWTM_Client");
+        driver.get(properties.getProperty("url-login-mc1"));
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement inputElementDomain = wait.until(ExpectedConditions.elementToBeClickable(By.id("Domain")));
         Thread.sleep(1000);

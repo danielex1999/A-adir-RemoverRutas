@@ -17,6 +17,7 @@ public class AgenciaMapping {
         AGENCIA_MAPPING.put("TB_INDEP","14175 - INDEPENDENCIA");
         AGENCIA_MAPPING.put("TB_VIRTUAL INDEP","14175 - INDEPENDENCIA");
         AGENCIA_MAPPING.put("TB_VIRTUAL SJL","14176 - SAN JUAN DE LURIGANCHO");
+        AGENCIA_MAPPING.put("TB_SJL","14176 - SAN JUAN DE LURIGANCHO");
         AGENCIA_MAPPING.put("TB_VIRTUAL VES","14177 - VILLA EL SALVADOR");
         // Agrega más correspondencias según sea necesario
 
