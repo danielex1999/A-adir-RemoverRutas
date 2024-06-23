@@ -1,13 +1,11 @@
-package org.excel;
+package org.methods;
 
 import java.util.*;
 
-public class AgenciaMapping {
+public class agencyMapping {
     private static final Map<String, String> AGENCIA_MAPPING = new HashMap<>();
 
-    public AgenciaMapping() {
-        // Agregar correspondencias al mapa
-
+    public agencyMapping() {
         /*Lima*/
         AGENCIA_MAPPING.put("TB_CAL", "14161 - CALLAO");
         AGENCIA_MAPPING.put("CONS", "14161 - CALLAO");
@@ -32,7 +30,7 @@ public class AgenciaMapping {
         // Agrega más correspondencias según sea necesario
     }
 
-    public String obtenerAgenciaSeleccionada(String clave) {
-        return AGENCIA_MAPPING.get(clave);
+    public String getSelectedAgency(String agency) {
+        return AGENCIA_MAPPING.get(agency);
     }
 }
