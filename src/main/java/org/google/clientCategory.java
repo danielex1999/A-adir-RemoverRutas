@@ -18,6 +18,7 @@ public class clientCategory {
             e.printStackTrace();
         }
     }
+
     public void toSalesCenter(WebDriver driver) throws InterruptedException {
         Thread.sleep(4000);
         driver.get(properties.getProperty("url-centroVentas-mc1"));

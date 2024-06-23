@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class clientUnassignment {
+public class clientAssociatedRoutes {
 
     private static final String PROPERTIES_FILE = "config.properties";
     private static final Properties properties;
@@ -59,7 +59,7 @@ public class clientUnassignment {
         for (int i = clienteInicial; i <= clienteFinal; i++) {
             XSSFRow row = sheet.getRow(i - 1);
             getCurrentTime.setTime(i);
-            methodsFunctionalityBankery.clientUnassignment(row, driver);
+            methodsFunctionalityBankery.ClientAssignment(row, driver);
             System.out.println("---------------------------------");
             saveWorkbook.saveExcelPerClient(workbook, filePath);
         }

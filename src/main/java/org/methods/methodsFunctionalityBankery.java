@@ -230,6 +230,10 @@ public class methodsFunctionalityBankery {
         }
     }
 
+    public void clientAssociatedRoutes(XSSFRow row, WebDriver driver) {
+
+    }
+
     private void clickElementWithJS(WebDriver driver, WebElement element) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
