@@ -12,7 +12,7 @@ public class clientCategory {
 
     static {
         properties = new Properties();
-        try (InputStream input = Login.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
+        try (InputStream input = loginToSite.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
             properties.load(input);
         } catch (Exception e) {
             e.printStackTrace();

@@ -5,7 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.excel.fieldGenerationInExcel;
 import org.excel.saveWorkbook;
-import org.google.Login;
+import org.google.loginToSite;
 import org.google.clientCategory;
 import org.methods.*;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +24,7 @@ public class clientAssignment {
 
     static {
         properties = new Properties();
-        try (InputStream input = Login.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
+        try (InputStream input = loginToSite.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
             properties.load(input);
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,12 +47,12 @@ public class clientAssignment {
         methodsFunctionalityBankery methodsFunctionalityBankery = new methodsFunctionalityBankery();
         saveWorkbook saveWorkbook = new saveWorkbook();
         getCurrentTime getCurrentTime = new getCurrentTime();
-        Login login = new Login();
+        loginToSite loginToSite = new loginToSite();
         clientCategory clientCategory = new clientCategory();
 
         XSSFSheet sheet = workbook.getSheetAt(0);
         fieldGenerationInExcel.createStatusCells(sheet);
-        login.LoginToMC1(driver);
+        loginToSite.LoginToMC1(driver);
         clientCategory.toSalesCenter(driver);
 
         for (int i = clienteInicial; i <= clienteFinal; i++) {

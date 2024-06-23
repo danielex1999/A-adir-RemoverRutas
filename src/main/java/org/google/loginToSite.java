@@ -10,13 +10,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class Login {
+public class loginToSite {
     private static final String PROPERTIES_FILE = "config.properties";
     private static final Properties properties;
 
     static {
         properties = new Properties();
-        try (InputStream input = Login.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
+        try (InputStream input = loginToSite.class.getClassLoader().getResourceAsStream(PROPERTIES_FILE)) {
             properties.load(input);
         } catch (Exception e) {
             e.printStackTrace();
