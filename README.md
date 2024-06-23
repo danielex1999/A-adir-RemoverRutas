@@ -13,17 +13,33 @@ El proyecto debe de tener el excel estructurado de la siguiente manera:
 | 2 |   |         |        |                |
 
 ---
+
 ### Funcionamiento de los métodos
 
 1. **Asignación de Ruta del Cliente**
 
-    sdadasdasdas
-    ads
+   Se encarga de gestionar la asignación de rutas a clientes dentro de un entorno de aplicación
+   específico, utilizando Selenium para la automatización de navegadores web y Apache POI para el manejo de archivos
+   Excel.
 
+   Esta clase incluye métodos para:
 
+   - [ ] Filtrar y seleccionar clientes mediante un código específico.
+   - [ ] Asignar una ruta preventa a un cliente, verificando su estado activo.
+   - [ ] Manejar errores y excepciones cuando no se encuentra la ruta o al intentar modificarla.
+   - [ ] Guardar el estado anterior y actual de la ruta para fines de registro y seguimiento.
 
-2. **Retiro de Ruta del Cliente**
+2. **Desasignación de Ruta del Cliente**
+   Se encarga de gestionar la desasignación de rutas de clientes dentro de un entorno de aplicación específico,
+   utilizando Selenium para la automatización de navegadores web y Apache POI para el manejo de archivos Excel.
 
+   Esta clase incluye métodos para:
+   
+   - [ ] Filtrar y seleccionar clientes mediante un código específico.
+   - [ ] Retirar una ruta preventa asignada a un cliente, verificando su estado activo.
+   - [ ] Manejar errores y excepciones cuando no se encuentra la ruta o al intentar modificarla.
+   - [ ] Guardar el estado anterior y actual de la ruta para fines de registro y seguimiento.
+   
 ---
 
 <div align="center">
