@@ -107,7 +107,7 @@ public class methodsFunctionalityBankery {
                 estadoActivo = true;
                 System.out.println("La ruta se encuentra Asignada");
             } else {
-                EstadoAnterior.setCellValue("Ruta no Asignada");
+                EstadoAnterior.setCellValue("Ruta Desasignada");
             }
 
             //Agregar Ruta al Cliente
