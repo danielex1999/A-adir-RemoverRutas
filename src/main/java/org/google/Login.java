@@ -23,7 +23,7 @@ public class Login {
         }
     }
 
-    public void InicioSesion(WebDriver driver) throws InterruptedException {
+    public void LoginToMC1(WebDriver driver) throws InterruptedException {
         driver.get(properties.getProperty("url-login-mc1"));
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement inputElementDomain = wait.until(ExpectedConditions.elementToBeClickable(By.id("Domain")));

@@ -52,14 +52,26 @@ Se generan las siguientes celdas en el archivo Excel:
 | 1 |   | AGENCIA | CODIGO | RUTA PRE-VENTA | Estado Anterior | Estado Actual |
 | 2 |   |         |        |                |                 |               |
 
+Dentro de `Asignación de Ruta del Cliente` se considera de la siguiente forma:
+
 - `Estado Anterior`: Representa el estado anterior de algún proceso:
-    - **Ruta Activa:** Indica que la ruta estaba activa antes de cualquier cambio.
-    - **Ruta no Activa:** Indica que la ruta no estaba activa antes de cualquier cambio.
+    - **Ruta Asignada:** Indica que la ruta estaba activa antes de cualquier cambio.
+    - **Ruta Desasignada:** Indica que la ruta no estaba activa antes de cualquier cambio.
     - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
 - `Estado Actual`: Representa el estado actual de algún proceso:
-    - **Ruta Activa:** Indica que la ruta permanece activa después de las modificaciones.
-    - **Ruta no Activa:** Indica que la ruta no está activa después de las modificaciones.
-    - **Ruta Agregada:** Indica que la ruta ha sido agregada al cliente.
+    - **Ruta Asignada:** Indica que la ruta ha sido agregada al cliente.
+    - **Ruta Desasignada:** Indica que la ruta no está activa después de las modificaciones.
+    - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
+
+Dentro de `Desasignación de Ruta del Cliente` se considera de la siguiente forma:
+
+- `Estado Anterior`: Representa el estado anterior de algún proceso:
+    - **Ruta Asignada:** Indica que la ruta estaba activa antes de cualquier cambio.
+    - **Ruta Desasignada:** Indica que la ruta no estaba activa antes de cualquier cambio.
+    - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
+- `Estado Actual`: Representa el estado actual de algún proceso:
+    - **Ruta Asignada:** Indica que la ruta no está desactiva después de las modificaciones.
+    - **Ruta Desasignada:** Indica que la ruta ha sido retirada del cliente.
     - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
 
 ---
