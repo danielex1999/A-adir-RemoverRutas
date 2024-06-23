@@ -74,8 +74,8 @@ public class methodsFunctionalityBankery {
             Thread.sleep(1000);
             clienteClickeado = true;
         } catch (TimeoutException e) {
-            EstadoAnterior.setCellValue("---");
-            EstadoActual.setCellValue("No se encontró la ruta en la agencia " + Agencia.getStringCellValue());
+            EstadoAnterior.setCellValue("Ruta no encontrada");
+            EstadoActual.setCellValue("Ruta no encontrada");
 
         }
         if (clienteClickeado) {
@@ -102,12 +102,12 @@ public class methodsFunctionalityBankery {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             String leftValue = (String) js.executeScript("return window.getComputedStyle(arguments[0], ':after').left;", interruptor);
             if ("24px".equals(leftValue)) {
-                EstadoAnterior.setCellValue("Ruta Activa");
-                EstadoActual.setCellValue("Ruta Activa");
+                EstadoAnterior.setCellValue("Ruta Asignada");
+                EstadoActual.setCellValue("Ruta Asignada");
                 estadoActivo = true;
-                System.out.println("La ruta se encuentra activa");
+                System.out.println("La ruta se encuentra Asignada");
             } else {
-                EstadoAnterior.setCellValue("Ruta No Activa");
+                EstadoAnterior.setCellValue("Ruta no Asignada");
             }
 
             //Agregar Ruta al Cliente
@@ -121,11 +121,11 @@ public class methodsFunctionalityBankery {
                 WebElement buttonGuardar = driver.findElement(By.id("btnSaveCustomer"));
                 buttonGuardar.click();
                 Thread.sleep(4000);
-                EstadoActual.setCellValue("Ruta Agregada");
-                System.out.println("La ruta ha sido agregada");
+                EstadoActual.setCellValue("Ruta Asignada");
+                System.out.println("La ruta ha sido Asignada");
             }
         } else {
-            System.out.println("Se encontró un error al hacer clic en el cliente, no se realizaron más acciones.");
+            System.out.println("Se encontró un error al hacer clic en el cliente");
         }
     }
 
@@ -175,8 +175,8 @@ public class methodsFunctionalityBankery {
             Thread.sleep(1000);
             clienteClickeado = true;
         } catch (TimeoutException e) {
-            EstadoAnterior.setCellValue("---");
-            EstadoActual.setCellValue("No se encontró la ruta en la agencia " + Agencia.getStringCellValue());
+            EstadoAnterior.setCellValue("Ruta no encontrada");
+            EstadoActual.setCellValue("Ruta no encontrada");
 
         }
         if (clienteClickeado) {
@@ -203,12 +203,12 @@ public class methodsFunctionalityBankery {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             String leftValue = (String) js.executeScript("return window.getComputedStyle(arguments[0], ':after').left;", interruptor);
             if (!"24px".equals(leftValue)) {
-                EstadoAnterior.setCellValue("Ruta No Activa");
-                EstadoActual.setCellValue("Ruta No Activa");
+                EstadoAnterior.setCellValue("Ruta Desasignada");
+                EstadoActual.setCellValue("Ruta Desasignada");
                 estadoDesactivo = true;
-                System.out.println("La ruta se encuentra no activa");
+                System.out.println("La ruta se encuentra Desasignada");
             } else {
-                EstadoAnterior.setCellValue("Ruta Activa");
+                EstadoAnterior.setCellValue("Ruta Asignada");
             }
 
             //Retirar de Ruta
@@ -222,11 +222,11 @@ public class methodsFunctionalityBankery {
                 WebElement buttonGuardar = driver.findElement(By.id("btnSaveCustomer"));
                 buttonGuardar.click();
                 Thread.sleep(4000);
-                EstadoActual.setCellValue("Ruta Retirada");
-                System.out.println("La ruta ha sido retirada");
+                EstadoActual.setCellValue("Ruta Desasignada");
+                System.out.println("La ruta ha sido Desasignada");
             }
         } else {
-            System.out.println("Se encontró un error al hacer clic en el cliente, no se realizaron más acciones.");
+            System.out.println("Se encontró un error al hacer clic en el cliente");
         }
     }
 
