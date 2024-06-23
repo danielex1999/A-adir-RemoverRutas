@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class RegistroCliente {
+public class clientCategory {
 
     private static final String PROPERTIES_FILE = "config.properties";
     private static final Properties properties;
@@ -18,7 +18,7 @@ public class RegistroCliente {
             e.printStackTrace();
         }
     }
-    public void IngresoCentrodeVentas(WebDriver driver) throws InterruptedException {
+    public void toSalesCenter(WebDriver driver) throws InterruptedException {
         Thread.sleep(4000);
         driver.get(properties.getProperty("url-centroVentas-mc1"));
     }
