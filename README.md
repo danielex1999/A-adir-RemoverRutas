@@ -54,12 +54,12 @@ Se generan las siguientes celdas en el archivo Excel:
 
 - `Estado Anterior`: Representa el estado anterior de algún proceso:
     - **Ruta Activa:** Indica que la ruta estaba activa antes de cualquier cambio.
-    - **Ruta No Activa:** Indica que la ruta no estaba activa antes de cualquier cambio.
-    - **---:** Indica que no se encontró la ruta en la agencia especificada.
+    - **Ruta no Activa:** Indica que la ruta no estaba activa antes de cualquier cambio.
+    - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
 - `Estado Actual`: Representa el estado actual de algún proceso:
     - **Ruta Activa:** Indica que la ruta permanece activa después de las modificaciones.
-    - **Ruta No Activa:** Indica que la ruta no está activa después de las modificaciones.
-    - **Ruta Agregada":** Indica que la ruta ha sido agregada al cliente.
+    - **Ruta no Activa:** Indica que la ruta no está activa después de las modificaciones.
+    - **Ruta Agregada:** Indica que la ruta ha sido agregada al cliente.
     - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
 
 ---
