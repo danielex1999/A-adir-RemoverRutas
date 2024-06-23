@@ -32,16 +32,17 @@ public class clientAssignment {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
+        String filePath = properties.getProperty("excel-path-file") + properties.getProperty("excel-file") + ".xlsx";
+        int clienteInicial = Integer.parseInt(properties.getProperty("clienteInicial"));
+        int clienteFinal = Integer.parseInt(properties.getProperty("clienteFinal"));
+
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--user-data-dir=" + properties.getProperty("chrome-options"));
-
         System.setProperty("webdriver.chrome.driver", properties.getProperty("chromedriver-path"));
         WebDriver driver = new ChromeDriver(options);
 
-        FileInputStream fis = new FileInputStream(properties.getProperty("excel-path-file") + properties.getProperty("excel-file") + ".xlsx");
+        FileInputStream fis = new FileInputStream(filePath);
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
-        XSSFSheet sheet = workbook.getSheetAt(0);
-
         fieldGenerationInExcel fieldGenerationInExcel = new fieldGenerationInExcel();
         methodsFunctionalityBankery methodsFunctionalityBankery = new methodsFunctionalityBankery();
         saveWorkbook saveWorkbook = new saveWorkbook();
@@ -49,16 +50,17 @@ public class clientAssignment {
         Login login = new Login();
         clientCategory clientCategory = new clientCategory();
 
+        XSSFSheet sheet = workbook.getSheetAt(0);
         fieldGenerationInExcel.createStatusCells(sheet);
         login.LoginToMC1(driver);
         clientCategory.toSalesCenter(driver);
 
-        for (int i = Integer.parseInt(properties.getProperty("clienteInicial")); i <= Integer.parseInt(properties.getProperty("clienteFinal")); i++) {
+        for (int i = clienteInicial; i <= clienteFinal; i++) {
             XSSFRow row = sheet.getRow(i - 1);
             getCurrentTime.setTime(i);
             methodsFunctionalityBankery.ClientAssignment(row, driver);
             System.out.println("---------------------------------");
-            saveWorkbook.saveExcelPerClient(workbook, fis.toString());
+            saveWorkbook.saveExcelPerClient(workbook, filePath);
         }
         workbook.close();
         driver.quit();
