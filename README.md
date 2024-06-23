@@ -1,6 +1,6 @@
 ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)<img src="https://cdn.iconscout.com/icon/free/png-512/java-43-569305.png" width="35px" alt="java" align="right">
 
-## Configuración de Rutas MC1
+## Configuración de Rutas
 
 Para este proyecto se busca mediante un Excel la Agencia, Código de Cliente y la Ruta Pre-Venta, una vez definido los
 campos lo que se realiza es el ingreso al portal, el inicio de sesión del cliente registrado dentro del código asociado.
