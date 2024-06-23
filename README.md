@@ -24,24 +24,45 @@ El proyecto debe de tener el excel estructurado de la siguiente manera:
 
    Esta clase incluye métodos para:
 
-   - [ ] Filtrar y seleccionar clientes mediante un código específico.
-   - [ ] Asignar una ruta preventa a un cliente, verificando su estado activo.
-   - [ ] Manejar errores y excepciones cuando no se encuentra la ruta o al intentar modificarla.
-   - [ ] Guardar el estado anterior y actual de la ruta para fines de registro y seguimiento.
+    - [x] Filtrar y seleccionar clientes mediante un código específico.
+    - [x] Asignar una ruta preventa a un cliente, verificando su estado activo.
+    - [x] Manejar errores y excepciones cuando no se encuentra la ruta o al intentar modificarla.
+    - [x] Guardar el estado anterior y actual de la ruta para fines de registro y seguimiento.
 
 2. **Desasignación de Ruta del Cliente**
+
    Se encarga de gestionar la desasignación de rutas de clientes dentro de un entorno de aplicación específico,
    utilizando Selenium para la automatización de navegadores web y Apache POI para el manejo de archivos Excel.
 
    Esta clase incluye métodos para:
-   
-   - [ ] Filtrar y seleccionar clientes mediante un código específico.
-   - [ ] Retirar una ruta preventa asignada a un cliente, verificando su estado activo.
-   - [ ] Manejar errores y excepciones cuando no se encuentra la ruta o al intentar modificarla.
-   - [ ] Guardar el estado anterior y actual de la ruta para fines de registro y seguimiento.
-   
+
+    - [x] Filtrar y seleccionar clientes mediante un código específico.
+    - [x] Retirar una ruta preventa asignada a un cliente, verificando su estado activo.
+    - [x] Manejar errores y excepciones cuando no se encuentra la ruta o al intentar modificarla.
+    - [x] Guardar el estado anterior y actual de la ruta para fines de registro y seguimiento.
+
 ---
 
+### Resultados generados dentro del Excel
+
+Se generan las siguientes celdas en el archivo Excel:
+
+|   | A | B       | C      | D              | E               | F             |
+|---|---|---------|--------|----------------|-----------------|---------------|
+| 1 |   | AGENCIA | CODIGO | RUTA PRE-VENTA | Estado Anterior | Estado Actual |
+| 2 |   |         |        |                |                 |               |
+
+- `Estado Anterior`: Representa el estado anterior de algún proceso:
+    - **Ruta Activa:** Indica que la ruta estaba activa antes de cualquier cambio.
+    - **Ruta No Activa:** Indica que la ruta no estaba activa antes de cualquier cambio.
+    - **---:** Indica que no se encontró la ruta en la agencia especificada.
+- `Estado Actual`: Representa el estado actual de algún proceso:
+    - **Ruta Activa:** Indica que la ruta permanece activa después de las modificaciones.
+    - **Ruta No Activa:** Indica que la ruta no está activa después de las modificaciones.
+    - **Ruta Agregada":** Indica que la ruta ha sido agregada al cliente.
+    - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
+
+---
 <div align="center">
 
 ![215002917 Brave Shift.png](src%2Fmain%2Fresources%2Fimg%2F215002917%20Brave%20Shift.png)
