@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class clientUnassignment {
+public class clientAssociatedRoutes {
 
     private static final String PROPERTIES_FILE = "config.properties";
     private static final Properties properties;
@@ -52,16 +52,16 @@ public class clientUnassignment {
         clientCategory clientCategory = new clientCategory();
 
         XSSFSheet sheet = workbook.getSheetAt(0);
-        fieldGenerationInExcel.createStatusCells(sheet);
         loginToSite.LoginToMC1(driver);
         clientCategory.toSalesCenter(driver);
+        fieldGenerationInExcel.generateRouteSheet(workbook, filePath);
 
         for (int i = clienteInicial; i <= clienteFinal; i++) {
             XSSFRow row = sheet.getRow(i - 1);
             getCurrentTime.setTime(i);
-            methodsFunctionalityBakery.clientUnassignment(row, driver);
-            System.out.println("---------------------------------");
+            methodsFunctionalityBakery.clientAssociatedRoutes(workbook, row, i, driver);
             saveWorkbook.saveExcelPerClient(workbook, filePath);
+            System.out.println("---------------------------------");
         }
         workbook.close();
         driver.quit();
