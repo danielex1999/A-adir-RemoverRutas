@@ -8,7 +8,7 @@ import org.excel.saveWorkbook;
 import org.google.clientCategory;
 import org.google.loginToSite;
 import org.methods.getCurrentTime;
-import org.methods.methodsFunctionalityBankery;
+import org.methods.methodsFunctionalityBakery;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -45,7 +45,7 @@ public class clientUnassignment {
         FileInputStream fis = new FileInputStream(filePath);
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         fieldGenerationInExcel fieldGenerationInExcel = new fieldGenerationInExcel();
-        methodsFunctionalityBankery methodsFunctionalityBankery = new methodsFunctionalityBankery();
+        methodsFunctionalityBakery methodsFunctionalityBakery = new methodsFunctionalityBakery();
         saveWorkbook saveWorkbook = new saveWorkbook();
         getCurrentTime getCurrentTime = new getCurrentTime();
         loginToSite loginToSite = new loginToSite();
@@ -59,7 +59,7 @@ public class clientUnassignment {
         for (int i = clienteInicial; i <= clienteFinal; i++) {
             XSSFRow row = sheet.getRow(i - 1);
             getCurrentTime.setTime(i);
-            methodsFunctionalityBankery.clientUnassignment(row, driver);
+            methodsFunctionalityBakery.clientUnassignment(row, driver);
             System.out.println("---------------------------------");
             saveWorkbook.saveExcelPerClient(workbook, filePath);
         }

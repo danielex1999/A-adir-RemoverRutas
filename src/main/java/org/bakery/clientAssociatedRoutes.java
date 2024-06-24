@@ -8,7 +8,7 @@ import org.excel.saveWorkbook;
 import org.google.clientCategory;
 import org.google.loginToSite;
 import org.methods.getCurrentTime;
-import org.methods.methodsFunctionalityBankery;
+import org.methods.methodsFunctionalityBakery;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -45,23 +45,25 @@ public class clientAssociatedRoutes {
         FileInputStream fis = new FileInputStream(filePath);
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         fieldGenerationInExcel fieldGenerationInExcel = new fieldGenerationInExcel();
-        methodsFunctionalityBankery methodsFunctionalityBankery = new methodsFunctionalityBankery();
+        methodsFunctionalityBakery methodsFunctionalityBakery = new methodsFunctionalityBakery();
         saveWorkbook saveWorkbook = new saveWorkbook();
         getCurrentTime getCurrentTime = new getCurrentTime();
         loginToSite loginToSite = new loginToSite();
         clientCategory clientCategory = new clientCategory();
 
+        fieldGenerationInExcel.generateRouteSheet(workbook, filePath);
         XSSFSheet sheet = workbook.getSheetAt(0);
-        fieldGenerationInExcel.createStatusCells(sheet);
-        loginToSite.LoginToMC1(driver);
-        clientCategory.toSalesCenter(driver);
+
+        //loginToSite.LoginToMC1(driver);
+        //clientCategory.toSalesCenter(driver);
 
         for (int i = clienteInicial; i <= clienteFinal; i++) {
             XSSFRow row = sheet.getRow(i - 1);
             getCurrentTime.setTime(i);
-            methodsFunctionalityBankery.ClientAssignment(row, driver);
-            System.out.println("---------------------------------");
+            methodsFunctionalityBakery.clientAssociatedRoutes(workbook, row, i, driver);
             saveWorkbook.saveExcelPerClient(workbook, filePath);
+            System.out.println("---------------------------------");
+
         }
         workbook.close();
         driver.quit();

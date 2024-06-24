@@ -2,15 +2,17 @@ package org.methods;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.google.loginToSite;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.excel.*;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class methodsFunctionalityBankery {
+public class methodsFunctionalityBakery {
     private static final agencyMapping AGENCY_MAPPING = new agencyMapping();
 
     private static final String PROPERTIES_FILE = "config.properties";
@@ -230,8 +232,22 @@ public class methodsFunctionalityBankery {
         }
     }
 
-    public void clientAssociatedRoutes(XSSFRow row, WebDriver driver) {
+    public void clientAssociatedRoutes(XSSFWorkbook workbook, XSSFRow row, int i, WebDriver driver) {
+        fieldGenerationInExcel fieldGenerationInExcel= new fieldGenerationInExcel();
+        XSSFCell agencia = row.getCell(1);
+        XSSFCell codigo = row.getCell(2);
+        // Insertando valores de Agencia, Código a "Rutas Activas"
+        XSSFSheet sheet = workbook.getSheetAt(1);
+        XSSFRow rowRutasActivas = sheet.createRow(i - 1);
 
+        XSSFCell agenciaRutasActivas = rowRutasActivas.createCell(1);
+        XSSFCell codigoRutasActivas = rowRutasActivas.createCell(2);
+        //XSSFCell rutasActivas = rowRutasActivas.createCell(3);
+
+        agenciaRutasActivas.setCellStyle(fieldGenerationInExcel.createCenteredStyle(workbook));
+        codigoRutasActivas.setCellStyle(fieldGenerationInExcel.createCenteredStyle(workbook));
+        agenciaRutasActivas.setCellValue(agencia.getStringCellValue());
+        codigoRutasActivas.setCellValue(codigo.getStringCellValue());
     }
 
     private void clickElementWithJS(WebDriver driver, WebElement element) {
