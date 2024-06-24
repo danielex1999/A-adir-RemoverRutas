@@ -51,11 +51,10 @@ public class clientAssociatedRoutes {
         loginToSite loginToSite = new loginToSite();
         clientCategory clientCategory = new clientCategory();
 
-        fieldGenerationInExcel.generateRouteSheet(workbook, filePath);
         XSSFSheet sheet = workbook.getSheetAt(0);
-
-        //loginToSite.LoginToMC1(driver);
-        //clientCategory.toSalesCenter(driver);
+        loginToSite.LoginToMC1(driver);
+        clientCategory.toSalesCenter(driver);
+        fieldGenerationInExcel.generateRouteSheet(workbook, filePath);
 
         for (int i = clienteInicial; i <= clienteFinal; i++) {
             XSSFRow row = sheet.getRow(i - 1);
@@ -63,7 +62,6 @@ public class clientAssociatedRoutes {
             methodsFunctionalityBakery.clientAssociatedRoutes(workbook, row, i, driver);
             saveWorkbook.saveExcelPerClient(workbook, filePath);
             System.out.println("---------------------------------");
-
         }
         workbook.close();
         driver.quit();

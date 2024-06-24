@@ -24,13 +24,13 @@ public class loginToSite {
     }
 
     public void LoginToMC1(WebDriver driver) throws InterruptedException {
-        driver.get(properties.getProperty("url-login-mc1"));
+        driver.get(properties.getProperty("url-loginToSite-mc1"));
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement inputElementDomain = wait.until(ExpectedConditions.elementToBeClickable(By.id("Domain")));
         Thread.sleep(1000);
 
         // Obtiene la contraseña desde el archivo de propiedades
-        String password = properties.getProperty("password-login-mc1");
+        String password = properties.getProperty("password-loginToSite-mc1");
 
         // Ingresa la contraseña en el campo
         inputElementDomain.sendKeys(password);

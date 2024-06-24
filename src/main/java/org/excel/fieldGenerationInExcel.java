@@ -52,4 +52,8 @@ public class fieldGenerationInExcel {
         centeredStyle.setAlignment(HorizontalAlignment.CENTER);
         return centeredStyle;
     }
+
+    public void createSizeRouteStyle(XSSFSheet sheet, int i) {
+        sheet.setColumnWidth(i, 20 * 256);
+    }
 }
