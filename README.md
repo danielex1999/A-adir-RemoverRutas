@@ -1,5 +1,10 @@
 ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)<img src="https://cdn.iconscout.com/icon/free/png-512/java-43-569305.png" width="35px" alt="java" align="right">
 
+![](https://img.shields.io/github/v/tag/danielex1999/ClientRouteManagement-BakeryDivision?style=social&logo=github
+)
+![](https://img.shields.io/github/last-commit/danielex1999/ClientRouteManagement-BakeryDivision?style=social&logo=github
+)
+
 ## Configuración de Rutas
 
 Para este proyecto se busca mediante un Excel la Agencia, Código de Cliente y la Ruta Pre-Venta, una vez definido los
