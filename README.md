@@ -10,12 +10,20 @@
 Para este proyecto se busca mediante un Excel la Agencia, Código de Cliente y la Ruta Pre-Venta, una vez definido los
 campos lo que se realiza es el ingreso al portal, el inicio de sesión del cliente registrado dentro del código asociado.
 
-El proyecto debe de tener el excel estructurado de la siguiente manera:
+El proyecto debe de tener el excel estructurado de la siguiente manera en los métodos **Asignación de Ruta del Cliente**
+y **Desasignación de Ruta del Cliente**:
 
-|   | A | B       | C      | D              |
-|---|---|---------|--------|----------------|
+|   | A |    B    |   C    |       D        |
+|:-:|:-:|:-------:|:------:|:--------------:|
 | 1 |   | AGENCIA | CODIGO | RUTA PRE-VENTA |
 | 2 |   |         |        |                |
+
+Por otra parte, con el método **Validación de Ruta del Cliente**, el excel estructurado de la siguiente manera:
+
+|   | A |    B    |   C    |
+|:-:|:-:|:-------:|:------:|
+| 1 |   | AGENCIA | CODIGO |
+| 2 |   |         |        | 
 
 ---
 
@@ -46,38 +54,76 @@ El proyecto debe de tener el excel estructurado de la siguiente manera:
     - [x] Manejar errores y excepciones cuando no se encuentra la ruta o al intentar modificarla.
     - [x] Guardar el estado anterior y actual de la ruta para fines de registro y seguimiento.
 
+3. **Validación de Ruta del Cliente**
+
+   Se encarga de gestionar las rutas activas de los clientes dentro de un entorno de aplicación específico,
+   utilizando Selenium para la automatización de navegadores web y Apache POI para el manejo de archivos Excel.
+
+   Esta clase incluye métodos para:
+
+    - [x] Filtrar y seleccionar clientes mediante un código específico.
+    - [x] Validar las rutas activas dentro de un cliente, verificando su estado activo.
+    - [x] Generar el listado de rutas activas dentro de Excel.
+
 ---
 
 ### Resultados generados dentro del Excel
 
-Se generan las siguientes celdas en el archivo Excel:
+1. **Asignación de Ruta del Cliente**
 
-|   | A | B       | C      | D              | E               | F             |
-|---|---|---------|--------|----------------|-----------------|---------------|
-| 1 |   | AGENCIA | CODIGO | RUTA PRE-VENTA | Estado Anterior | Estado Actual |
-| 2 |   |         |        |                |                 |               |
+   Se generan las siguientes celdas en el archivo Excel:
 
-Dentro de `Asignación de Ruta del Cliente` se considera de la siguiente forma:
+   |   | A |    B    |   C    |       D        |        E        |       F       |
+   |:-:|:-:|:-------:|:------:|:--------------:|:---------------:|:-------------:|
+   | 1 |   | AGENCIA | CODIGO | RUTA PRE-VENTA | Estado Anterior | Estado Actual |
+   | 2 |   |         |        |                |                 |               |
 
-- `Estado Anterior`: Representa el estado anterior de algún proceso:
-    - **Ruta Asignada:** Indica que la ruta estaba activa antes de cualquier cambio.
-    - **Ruta Desasignada:** Indica que la ruta no estaba activa antes de cualquier cambio.
-    - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
-- `Estado Actual`: Representa el estado actual de algún proceso:
-    - **Ruta Asignada:** Indica que la ruta ha sido agregada al cliente.
-    - **Ruta Desasignada:** Indica que la ruta no está activa después de las modificaciones.
-    - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
+   Dentro de `Asignación de Ruta del Cliente` se considera de la siguiente forma:
 
-Dentro de `Desasignación de Ruta del Cliente` se considera de la siguiente forma:
+    - `Estado Anterior`: Representa el estado anterior de algún proceso:
+        - **Ruta Asignada:** Indica que la ruta estaba activa antes de cualquier cambio.
+        - **Ruta Desasignada:** Indica que la ruta no estaba activa antes de cualquier cambio.
+        - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
+    - `Estado Actual`: Representa el estado actual de algún proceso:
+        - **Ruta Asignada:** Indica que la ruta ha sido agregada al cliente.
+        - **Ruta Desasignada:** Indica que la ruta no está activa después de las modificaciones.
+        - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada
 
-- `Estado Anterior`: Representa el estado anterior de algún proceso:
-    - **Ruta Asignada:** Indica que la ruta estaba activa antes de cualquier cambio.
-    - **Ruta Desasignada:** Indica que la ruta no estaba activa antes de cualquier cambio.
-    - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
-- `Estado Actual`: Representa el estado actual de algún proceso:
-    - **Ruta Asignada:** Indica que la ruta no está desactiva después de las modificaciones.
-    - **Ruta Desasignada:** Indica que la ruta ha sido retirada del cliente.
-    - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
+
+2. **Desasignación de Ruta del Cliente**
+
+   Se generan las siguientes celdas en el archivo Excel:
+
+   |   | A |    B    |   C    |       D        |        E        |       F       |
+   |:-:|:-:|:-------:|:------:|:--------------:|:---------------:|:-------------:|
+   | 1 |   | AGENCIA | CODIGO | RUTA PRE-VENTA | Estado Anterior | Estado Actual |
+   | 2 |   |         |        |                |                 |               |
+
+   Dentro de `Desasignación de Ruta del Cliente` se considera de la siguiente forma:
+
+    - `Estado Anterior`: Representa el estado anterior de algún proceso:
+        - **Ruta Asignada:** Indica que la ruta estaba activa antes de cualquier cambio.
+        - **Ruta Desasignada:** Indica que la ruta no estaba activa antes de cualquier cambio.
+        - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
+    - `Estado Actual`: Representa el estado actual de algún proceso:
+        - **Ruta Asignada:** Indica que la ruta no está desactiva después de las modificaciones.
+        - **Ruta Desasignada:** Indica que la ruta ha sido retirada del cliente.
+        - **Ruta no encontrada:** Indica que no se encontró la ruta en la agencia especificada.
+
+
+3. **Validación de Ruta del Cliente**
+
+   Se genera una nueva hoja de calculo llamada "Rutas Activas" que genera las siguientes celdas en el archivo Excel:
+
+   |   | A | B       | C      |       D       |
+   |:---:|:---:|:---:|:---:|:-------------:|
+   | 1 |   | AGENCIA | CODIGO | Rutas Activas |
+   | 2 |   |         |        |               |
+
+   Dentro de `Validación de Ruta del Cliente` se considera de la siguiente forma:
+
+- `Rutas Activas`: Representa el estado de rutas activas dentro del cliente:
+    - Generará de manera horizontal el ingreso de todas las rutas activas
 
 ---
 <div align="center">
@@ -85,7 +131,6 @@ Dentro de `Desasignación de Ruta del Cliente` se considera de la siguiente form
 ![215002917 Brave Shift.png](src%2Fmain%2Fresources%2Fimg%2F215002917%20Brave%20Shift.png)
 
 </div>
-
 
 > [!NOTE]
 > Se está utilizando para este proyecto las siguientes tecnologías.
