@@ -52,14 +52,14 @@ public class clientAssignment {
         clientCategory clientCategory = new clientCategory();
 
         XSSFSheet sheet = workbook.getSheetAt(0);
-        fieldGenerationInExcel.createStatusCells(sheet);
+        fieldGenerationInExcel.createStatusCells(workbook, sheet);
         loginToSite.LoginToMC1(driver);
         clientCategory.toSalesCenter(driver);
 
         for (int i = clienteInicial; i <= clienteFinal; i++) {
             XSSFRow row = sheet.getRow(i - 1);
             getCurrentTime.setTime(i);
-            methodsFunctionalityBakery.ClientAssignment(row, driver);
+            methodsFunctionalityBakery.ClientAssignment(workbook, row, driver);
             System.out.println("---------------------------------");
             saveWorkbook.saveExcelPerClient(workbook, filePath);
         }
