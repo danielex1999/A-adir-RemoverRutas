@@ -46,6 +46,17 @@ El proyecto debe de tener el excel estructurado de la siguiente manera:
     - [x] Manejar errores y excepciones cuando no se encuentra la ruta o al intentar modificarla.
     - [x] Guardar el estado anterior y actual de la ruta para fines de registro y seguimiento.
 
+3. **Validación de Ruta del Cliente**
+
+   Se encarga de gestionar las rutas activas de los clientes dentro de un entorno de aplicación específico,
+   utilizando Selenium para la automatización de navegadores web y Apache POI para el manejo de archivos Excel.
+
+   Esta clase incluye métodos para:
+
+   - [x] Filtrar y seleccionar clientes mediante un código específico.
+   - [x] Validar las rutas activas dentro de un cliente, verificando su estado activo.
+   - [x] Generar el listado de rutas activas dentro de Excel.
+
 ---
 
 ### Resultados generados dentro del Excel
