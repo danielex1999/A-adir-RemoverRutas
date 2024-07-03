@@ -55,7 +55,7 @@ El proyecto debe de tener el excel estructurado de la siguiente manera:
    Se generan las siguientes celdas en el archivo Excel:
 
    |   | A | B       | C      | D              | E               | F             |
-       |---|---|---------|--------|----------------|-----------------|---------------|
+   |---|---|---------|--------|----------------|-----------------|---------------|
    | 1 |   | AGENCIA | CODIGO | RUTA PRE-VENTA | Estado Anterior | Estado Actual |
    | 2 |   |         |        |                |                 |               |
 
@@ -75,7 +75,7 @@ El proyecto debe de tener el excel estructurado de la siguiente manera:
    Se generan las siguientes celdas en el archivo Excel:
 
    |   | A | B       | C      | D              | E               | F             |
-          |---|---|---------|--------|----------------|-----------------|---------------|
+   |---|---|---------|--------|----------------|-----------------|---------------|
    | 1 |   | AGENCIA | CODIGO | RUTA PRE-VENTA | Estado Anterior | Estado Actual |
    | 2 |   |         |        |                |                 |               |
 
