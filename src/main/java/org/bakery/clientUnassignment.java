@@ -52,7 +52,7 @@ public class clientUnassignment {
         clientCategory clientCategory = new clientCategory();
 
         XSSFSheet sheet = workbook.getSheetAt(0);
-        fieldGenerationInExcel.createStatusCells(sheet);
+        fieldGenerationInExcel.createStatusCells(workbook, sheet);
         loginToSite.LoginToMC1(driver);
         clientCategory.toSalesCenter(driver);
 

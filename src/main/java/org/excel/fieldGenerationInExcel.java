@@ -8,16 +8,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class fieldGenerationInExcel {
-    public void createStatusCells(XSSFSheet sheet) {
+    public void createStatusCells(XSSFWorkbook workbook, XSSFSheet sheet) {
         XSSFRow row = sheet.getRow(0);
         XSSFCell lastStatus = row.createCell(4);
         XSSFCell actualStatus = row.createCell(5);
 
+        lastStatus.setCellStyle(createCenteredStyle(workbook));
+        actualStatus.setCellStyle(createCenteredStyle(workbook));
         lastStatus.setCellValue("Estado Anterior");
         actualStatus.setCellValue("Estado Actual");
 
-        sheet.setColumnWidth(4, 15 * 256);
-        sheet.setColumnWidth(5, 15 * 256);
+        sheet.setColumnWidth(4, 18 * 256);
+        sheet.setColumnWidth(5, 18 * 256);
     }
 
     public void generateRouteSheet(XSSFWorkbook workbook, String filePath) throws IOException {
@@ -44,9 +46,6 @@ public class fieldGenerationInExcel {
         fos.close();
     }
 
-    public void createRouteCell(XSSFSheet sheet) {
-
-    }
     public XSSFCellStyle createCenteredStyle(XSSFWorkbook workbook) {
         XSSFCellStyle centeredStyle = workbook.createCellStyle();
         centeredStyle.setAlignment(HorizontalAlignment.CENTER);

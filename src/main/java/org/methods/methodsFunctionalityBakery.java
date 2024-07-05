@@ -15,7 +15,7 @@ import java.util.Properties;
 
 public class methodsFunctionalityBakery {
     private static final agencyMapping AGENCY_MAPPING = new agencyMapping();
-
+    fieldGenerationInExcel fieldGenerationInExcel = new fieldGenerationInExcel();
     private static final String PROPERTIES_FILE = "config.properties";
     private static final Properties properties;
 
@@ -31,7 +31,7 @@ public class methodsFunctionalityBakery {
         }
     }
 
-    public void ClientAssignment(XSSFRow row, WebDriver driver) throws InterruptedException {
+    public void ClientAssignment(XSSFWorkbook workbook, XSSFRow row, WebDriver driver) throws InterruptedException {
 
         // Insertando valores de Agencia, Código, Ruta Preventa, Status
         boolean estadoActivo = false;
@@ -105,6 +105,8 @@ public class methodsFunctionalityBakery {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             String leftValue = (String) js.executeScript("return window.getComputedStyle(arguments[0], ':after').left;", interruptor);
             if ("24px".equals(leftValue)) {
+                EstadoAnterior.setCellStyle(fieldGenerationInExcel.createCenteredStyle(workbook));
+                EstadoActual.setCellStyle(fieldGenerationInExcel.createCenteredStyle(workbook));
                 EstadoAnterior.setCellValue("Ruta Asignada");
                 EstadoActual.setCellValue("Ruta Asignada");
                 estadoActivo = true;
@@ -234,7 +236,7 @@ public class methodsFunctionalityBakery {
     }
 
     public void clientAssociatedRoutes(XSSFWorkbook workbook, XSSFRow row, int i, WebDriver driver) throws InterruptedException {
-        fieldGenerationInExcel fieldGenerationInExcel = new fieldGenerationInExcel();
+
         String xpathValidation = properties.getProperty("xpath-validation-mc1");
         String xpathRutaActiva = properties.getProperty("xpath-span-ruta-mc1");
         XSSFCell agencia = row.getCell(1);
